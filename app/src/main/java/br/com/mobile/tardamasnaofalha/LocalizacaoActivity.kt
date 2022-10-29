@@ -1,18 +1,16 @@
 package br.com.mobile.tardamasnaofalha
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 
-class AdicionarActivity : DebugActivity() {
+class LocalizacaoActivity : DebugActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_adicionar)
+        setContentView(R.layout.activity_localizacao)
 
-        supportActionBar?.title = "Adicionar Países"
+        supportActionBar?.title = "Localização do País"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

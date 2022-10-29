@@ -5,14 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 
-class AdicionarActivity : DebugActivity() {
+class SobreActivity : DebugActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_adicionar)
+        setContentView(R.layout.activity_sobre)
 
-        supportActionBar?.title = "Adicionar Países"
+        supportActionBar?.title = "Sobre a aplicação"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
