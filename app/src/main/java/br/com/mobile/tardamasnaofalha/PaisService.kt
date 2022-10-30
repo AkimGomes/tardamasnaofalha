@@ -1,43 +1,50 @@
 package br.com.mobile.tardamasnaofalha
 
+import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
+import java.net.URL
+
 object PaisService {
 
+    val host = "http://192.168.15.32:5000"
+    val TAG = "TardaMasNaoFalha"
+
     fun getPaises(): List<Pais> {
-        var paises = mutableListOf<Pais>()
+        //var paises = mutableListOf<Pais>()
+        try {
+            val url = "$host/paises"
+            val json = HttpHelper.get(url)
 
-        var pais1 = Pais()
-        pais1.id = 1
-        pais1.nome = "Brasil"
-        pais1.capital = "Brasília"
-        pais1.bandeira = "https://http2.mlstatic.com/D_NQ_NP_846593-MLB50471350726_062022-W.jpg"
-        pais1.continente = "América do Sul"
-        pais1.populacao = "214000000"
-        pais1.latitude = "+05o 16'19"
-        pais1.longitude = "-60o 12'45"
-        paises.add(pais1)
+            var paises = parseJson<MutableList<Pais>>(json)
 
-        var pais2 = Pais()
-        pais2.id = 2
-        pais2.nome = "Itália"
-        pais2.capital = "Roma"
-        pais2.bandeira = "https://img.freepik.com/vetores-premium/bandeira-italiana-bandeira-da-italia_175392-29.jpg"
-        pais2.continente = "Europa"
-        pais2.populacao = "59000000"
-        pais2.latitude = "12.4942 41° 53′ 26″"
-        pais2.longitude = "12° 29′ 39″"
-        paises.add(pais2)
+            Log.d(TAG, json)
 
-        var pais3 = Pais()
-        pais3.id = 3
-        pais3.nome = "Japão"
-        pais3.capital = "Tóquio"
-        pais3.bandeira = "https://i.pinimg.com/736x/a5/d6/88/a5d688289cd6850016f14fe93b17da01.jpg"
-        pais3.continente = "Ásia"
-        pais3.populacao = "125000000"
-        pais3.latitude = "139.692 35° 41′ 22″"
-        pais3.longitude = "139° 41′ 31″"
-        paises.add(pais3)
+            return paises
+        } catch (ex: Exception) {
+            var paises = DatabaseManager.getPaisDAO().findAll()
+            return ArrayList<Pais>()
+        }
+    }
 
-        return paises
+    fun savePais(pais: Pais) {
+        if (AndroidUtils.isInternetDisponivel()) {
+            val json = GsonBuilder().create().toJson(pais)
+            HttpHelper.post("$host/paises", json)
+        } else {
+            DatabaseManager.getPaisDAO().insert(pais)
+        }
+    }
+
+    fun deletePais(pais: Pais) {
+        val url = "$host/pais/<int:id>"
+        val json = HttpHelper.get(url)
+        HttpHelper.delete(json)
+    }
+
+    inline fun <reified T> parseJson(json: String): T {
+        val type = object : TypeToken<T>(){}.type
+        return Gson().fromJson<T>(json, type)
     }
 }

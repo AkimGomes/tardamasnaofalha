@@ -17,10 +17,29 @@ class MainActivity : DebugActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val nomeUsuario = Prefs.getString("nomeUsuario")
+        val senhaUsuario = Prefs.getString("senhaUsuario")
+
+        val checkLogin = Prefs.getBoolean("checkLogin")
+        binding.Usuario.setText(nomeUsuario)
+        binding.Senha.setText(senhaUsuario)
+        binding.checkBoxLogin.isChecked = checkLogin
+
+
         binding.botaoLogin.setOnClickListener {
 
             val nome_usuario = binding.Usuario.text.toString()
             val senha_usuario = binding.Senha.text.toString()
+
+            val checkLogin = binding.checkBoxLogin.isChecked
+            if (checkLogin) {
+                Prefs.setString("nomeUsuario", nome_usuario)
+                Prefs.setString("senhaUsuario", senha_usuario)
+            } else {
+                Prefs.setString("nomeUsuario", "")
+                Prefs.setString("senhaUsuario", "")
+            }
+            Prefs.setBoolean("checkLogin", checkLogin)
 
             if (nome_usuario != "aluno") {
                 Toast.makeText(this, "Usuário ou senha incorretos", Toast.LENGTH_LONG).show()

@@ -39,10 +39,18 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
 
     override fun onResume() {
         super.onResume()
-        paises = PaisService.getPaises()
-        binding.recyclerPaises?.adapter = PaisAdapter(paises) {
-            onClickPais(it)
-        }
+        this.taskPaises()
+    }
+
+    private fun taskPaises() {
+        Thread {
+            paises = PaisService.getPaises()
+            runOnUiThread {
+                binding.recyclerPaises?.adapter = PaisAdapter(paises) {
+                    onClickPais(it)
+                }
+            }
+        }.start()
     }
 
     fun onClickPais(pais: Pais) {
