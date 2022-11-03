@@ -49,6 +49,11 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
                 binding.recyclerPaises?.adapter = PaisAdapter(paises) {
                     onClickPais(it)
                 }
+                // notificação
+                val intent = Intent(this, PaisDetalhesActivity::class.java)
+                intent.putExtra("pais", paises[3])
+                NotificationUtil.create(1, intent, "tardamasnaofalha",
+                    "Você tem pendências na ${paises[3].nome}")
             }
         }.start()
     }

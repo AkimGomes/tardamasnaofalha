@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1082220085437",
+    "project_id": "tardamasnaofalha-kgomes",
+    "storage_bucket": "tardamasnaofalha-kgomes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082220085437:android:276f32a9015405bd52b7d4",
+        "android_client_info": {
+          "package_name": "br.com.mobile.tardamasnaofalha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082220085437-f07r4qgft6n2b93ld63i689enosbijoc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHxo8RW72O4yOhTE93Zz5Ytcpahm0nv64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082220085437-f07r4qgft6n2b93ld63i689enosbijoc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
